@@ -56,7 +56,7 @@ end
 ########################################
 run 'rm -rf app/assets/stylesheets'
 run 'rm -rf vendor'
-run 'curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip'
+run 'curl -L https://github.com/RamassamyM/rails-stylesheets-june-2018/master.zip > stylesheets.zip'
 run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets'
 inject_into_file 'app/assets/stylesheets/config/_bootstrap_variables.scss', before: '// Override other variables below!' do
 "
@@ -126,7 +126,7 @@ HTML
 # README
 ########################################
 markdown_file_content = <<-MARKDOWN
-Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+Rails app 
 MARKDOWN
 file 'README.md', markdown_file_content, force: true
 
@@ -253,5 +253,5 @@ YML
   ########################################
   git :init
   git add: '.'
-  git commit: "-m 'Initial commit with minimal template from https://github.com/lewagon/rails-templates'"
+  git commit: "-m 'Initial commit with minimal template' "
 end
