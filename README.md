@@ -27,3 +27,11 @@ rails new \
   -m https://raw.githubusercontent.com/RamassamyM/rails-templates-june-2018/master/devise.rb \
   CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
 ```
+
+## Devise with ldap
+
+Same as Devise **plus** a LDAP config
+
+```bash
+rails new --database postgresql --webpack --skip-test-unit -m https://raw.githubusercontent.com/RamassamyM/rails-templates-june-2018/master/devise-ldap.rb CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
+```
