@@ -373,5 +373,5 @@ YML
   ########################################
   git :init
   git add: '.'
-  git commit: "-m 'Initial commit with devise template"
+  git commit: "-m 'Initial commit with devise template' "
 end
