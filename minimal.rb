@@ -40,6 +40,11 @@ group :development, :test do
   gem 'launchy'
   gem 'factory_bot_rails'
 end
+
+group :test do
+  gem 'database_cleaner'
+end
+
 RUBY
 
 # Ruby version
