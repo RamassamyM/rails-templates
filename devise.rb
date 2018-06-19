@@ -24,6 +24,7 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -35,17 +36,16 @@ group :development, :test do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.7'
   gem 'capybara'
+  gem 'cucumber-rails', require: false
+  gem 'autotest-rails'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'launchy'
   gem 'factory_bot_rails'
   gem 'webmock', '~> 3.4', '>= 3.4.2'
-end
-
-group :test do
-  gem 'database_cleaner'
 end
 RUBY
 
@@ -160,7 +160,7 @@ run 'curl -L https://raw.githubusercontent.com/RamassamyM/rails-templates-june-2
 # README
 ########################################
 markdown_file_content = <<-MARKDOWN
-Rails app
+Rails app made by Michael Ramassamy
 MARKDOWN
 file 'README.md', markdown_file_content, force: true
 
@@ -170,7 +170,7 @@ generators = <<-RUBY
 config.generators do |generate|
       generate.assets false
       generate.helper false
-      generate.test_framework  :test_unit, fixture: false
+      generate.test_framework :rspec
     end
 RUBY
 
@@ -185,6 +185,8 @@ after_bundle do
   rails_command 'db:drop db:create db:migrate'
   generate('simple_form:install', '--bootstrap')
   generate(:controller, 'pages', 'home', '--skip-routes', '--no-test-framework')
+  generate('rspec:install')
+  generate('cucumber:install')
 
   # Routes
   ########################################
@@ -257,7 +259,7 @@ JS
 
   inject_into_file 'config/webpack/environment.js', before: 'module.exports' do
 <<-JS
-// Bootstrap 3 has a dependency over jQuery:
+// Bootstrap 3 (à vérifier avec 4.1.1) has a dependency over jQuery:
 const webpack = require('webpack')
 environment.plugins.prepend('Provide',
   new webpack.ProvidePlugin({
