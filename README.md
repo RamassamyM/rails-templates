@@ -11,9 +11,10 @@ Get a minimal rails 5.1+ app ready to be deployed on Heroku with Bootstrap, Simp
 ```bash
 rails new \
   --database postgresql \
-  --webpack --skip-test-unit\
+  --webpack \
   -m https://raw.githubusercontent.com/RamassamyM/rails-templates-june-2018/master/minimal.rb \
-  CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
+  CHANGE_THIS_TO_YOUR_RAILS_APP_NAME \
+  --skip-test-unit
 ```
 
 ## Devise
@@ -23,9 +24,10 @@ Same as minimal **plus** a Devise install with a generated `User` model.
 ```bash
 rails new \
   --database postgresql \
-  --webpack --skip-test-unit\
+  --webpack \
   -m https://raw.githubusercontent.com/RamassamyM/rails-templates-june-2018/master/devise.rb \
-  CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
+  CHANGE_THIS_TO_YOUR_RAILS_APP_NAME \
+  --skip-test-unit
 ```
 
 ## Devise with ldap
@@ -33,5 +35,5 @@ rails new \
 Same as Devise **plus** a LDAP config
 
 ```bash
-rails new --database postgresql --webpack --skip-test-unit -m https://raw.githubusercontent.com/RamassamyM/rails-templates-june-2018/master/devise-ldap.rb CHANGE_THIS_TO_YOUR_RAILS_APP_NAME
+rails new --database postgresql --webpack -m https://raw.githubusercontent.com/RamassamyM/rails-templates-june-2018/master/devise-ldap.rb CHANGE_THIS_TO_YOUR_RAILS_APP_NAME --skip-test-unit
 ```
