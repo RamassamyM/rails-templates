@@ -16,12 +16,13 @@ gem 'rails', '#{Rails.version}'
 gem 'redis'
 
 gem 'autoprefixer-rails'
-gem 'bootstrap-sass', '~> 3.3'
+gem 'bootstrap', '~> 4.1', '>= 4.1.1'
 gem 'font-awesome-sass', '~> 5.0.9'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
@@ -33,19 +34,17 @@ group :development, :test do
   gem 'listen', '~> 3.0.5'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.7'
   gem 'capybara'
+  gem 'cucumber-rails', require: false
+  gem 'autotest-rails'
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'launchy'
   gem 'factory_bot_rails'
   gem 'webmock', '~> 3.4', '>= 3.4.2'
 end
-
-group :test do
-  gem 'database_cleaner'
-end
-
 RUBY
 
 # Ruby version
@@ -68,8 +67,8 @@ end
 ########################################
 run 'rm -rf app/assets/stylesheets'
 run 'rm -rf vendor'
-run 'curl -L https://github.com/lewagon/stylesheets/archive/master.zip > stylesheets.zip'
-run 'unzip stylesheets.zip -d app/assets && rm stylesheets.zip && mv app/assets/rails-stylesheets-master app/assets/stylesheets'
+run 'curl -L https://github.com/lewagon/rails-stylesheets/archive/master.zip > stylesheets.zip'
+run 'unzip stylesheets.zip -d app/assets && rm -f stylesheets.zip && rm -f app/assets/rails-stylesheets-master/README.md && mv app/assets/rails-stylesheets-master app/assets/stylesheets'
 inject_into_file 'app/assets/stylesheets/config/_bootstrap_variables.scss', before: '// Override other variables below!' do
 "
 // Patch to make simple_form compatible with bootstrap 3
@@ -121,6 +120,7 @@ file 'app/views/layouts/application.html.erb', <<-HTML
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>TODO</title>
     <%= csrf_meta_tags %>
     <%= action_cable_meta_tag %>
@@ -138,7 +138,7 @@ HTML
 # README
 ########################################
 markdown_file_content = <<-MARKDOWN
-Rails app 
+Rails app made by Michael Ramassamy
 MARKDOWN
 file 'README.md', markdown_file_content, force: true
 
@@ -148,7 +148,7 @@ generators = <<-RUBY
 config.generators do |generate|
       generate.assets false
       generate.helper false
-      generate.test_framework  :test_unit, fixture: false
+      generate.test_framework :rspec
     end
 RUBY
 
@@ -163,7 +163,9 @@ after_bundle do
   rails_command 'db:drop db:create db:migrate'
   generate('simple_form:install', '--bootstrap')
   generate(:controller, 'pages', 'home', '--skip-routes', '--no-test-framework')
-
+  generate('rspec:install')
+  generate('cucumber:install')
+  
   # Routes
   ########################################
   route "root to: 'pages#home'"
@@ -191,14 +193,14 @@ TXT
   # Webpacker / Yarn
   ########################################
   run 'rm app/javascript/packs/application.js'
-  run 'yarn add jquery bootstrap@3'
+  run 'yarn add jquery bootstrap@4.1.1'
   file 'app/javascript/packs/application.js', <<-JS
 import "bootstrap";
 JS
 
   inject_into_file 'config/webpack/environment.js', before: 'module.exports' do
 <<-JS
-// Bootstrap 3 has a dependency over jQuery:
+// Bootstrap 3 (à vérifier avec 4.1.1) has a dependency over jQuery:
 const webpack = require('webpack')
 environment.plugins.prepend('Provide',
   new webpack.ProvidePlugin({
