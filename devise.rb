@@ -251,14 +251,14 @@ RUBY
   # Webpacker / Yarn
   ########################################
   run 'rm app/javascript/packs/application.js'
-  run 'yarn add jquery bootstrap@4.1.1'
+  run 'yarn add jquery bootstrap@4.1.0'
   file 'app/javascript/packs/application.js', <<-JS
 import "bootstrap";
 JS
 
   inject_into_file 'config/webpack/environment.js', before: 'module.exports' do
 <<-JS
-// Bootstrap 3 (à vérifier avec 4.1.1) has a dependency over jQuery:
+// Bootstrap 3 (à vérifier avec 4.1.0) has a dependency over jQuery:
 const webpack = require('webpack')
 environment.plugins.prepend('Provide',
   new webpack.ProvidePlugin({
@@ -325,5 +325,5 @@ YML
   ########################################
   git :init
   git add: '.'
-  git commit: "-m 'Initial commit with devise template"
+  git commit: "-m 'Initial commit with devise template' "
 end
