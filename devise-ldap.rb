@@ -15,6 +15,7 @@ gem 'pg', '~> 0.21'
 gem 'puma'
 gem 'rails', '#{Rails.version}'
 gem 'redis'
+gem 'net-ldap'
 
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.1', '>= 4.1.1'
