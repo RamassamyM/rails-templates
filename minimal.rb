@@ -18,10 +18,10 @@ gem 'redis'
 gem 'autoprefixer-rails'
 gem 'bootstrap', '~> 4.1', '>= 4.1.1'
 gem 'font-awesome-sass', '~> 5.0.9'
-gem 'sass-rails'
+# gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'webpacker'
+gem 'webpacker', '~> 3.5'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 
 group :development do
