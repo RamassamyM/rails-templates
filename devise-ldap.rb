@@ -271,6 +271,8 @@ environment.plugins.prepend('Provide',
 JS
   end
 
+  run 'yarn add popper.js'
+  
   # Figaro
   ########################################
   run 'bundle binstubs figaro'
